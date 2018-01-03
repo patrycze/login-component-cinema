@@ -15,7 +15,7 @@ export class User {
 
 
 @Injectable()
-export class AuthServiceProvider {
+export class AuthProvider {
   currentUser: User;
   
   public login(credentials) {

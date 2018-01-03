@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
-import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -11,7 +11,7 @@ export class HomePage {
   username = '';
   email = '';
 
-  constructor(public navCtrl: NavController, private auth: AuthServiceProvider) {
+  constructor(public navCtrl: NavController, private auth: AuthProvider) {
     let info = this.auth.getUserInfo();
     this.username = info['name'];
     this.email = info['email'];
