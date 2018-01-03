@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
-
+import { ApiProvider } from '../../providers/localapi/localapi';
 @IonicPage()
 @Component({
   selector: 'page-register',
@@ -9,21 +9,25 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class RegisterPage {
   createSuccess = false;
-  registerCredentials = { email: '', password: '' };
+  registerCredentials = { name: '', password: '' };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private alertCtrl: AlertController, private provider: ApiProvider) {
   }
 
   public register() {
-    this.auth.register(this.registerCredentials).subscribe(success => {
-      if(success) {
-        this.createSuccess = true;
-        this.showPopup("Success", "Account created");
-      } else {
-        this.showPopup("Error", "Problem with creating account")
-      }
-    }, error => {
-      this.showPopup("Error", error)
+    this.provider.create(this.registerCredentials) 
+    .subscribe(() => {
+        this.auth.register(this.registerCredentials).subscribe(success => {
+          if(success) {
+            this.createSuccess = true;
+            this.showPopup("Success", "Account created");
+            this.navCtrl.setRoot('LoginPage');
+          } else {
+            this.showPopup("Error", "Problem with creating account")
+          }
+        }, error => {
+          this.showPopup("Error", error)
+        })
     })
   }
 

@@ -3,11 +3,13 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, IonicPage } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 // import { HomePage } from '../pages/home/home';
 import { AuthProvider } from '../providers/auth/auth';
 import { DataProvider } from '../providers/data/data';
+import { ApiProvider } from '../providers/localapi/localapi';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { DataProvider } from '../providers/data/data';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -28,7 +31,8 @@ import { DataProvider } from '../providers/data/data';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    DataProvider
+    DataProvider,
+    ApiProvider
   ]
 })
 export class AppModule {}
