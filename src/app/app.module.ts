@@ -9,7 +9,8 @@ import { MyApp } from './app.component';
 // import { HomePage } from '../pages/home/home';
 import { AuthProvider } from '../providers/auth/auth';
 import { DataProvider } from '../providers/data/data';
-import { ApiProvider } from '../providers/localapi/localapi';
+import { CreateProvider } from '../providers/create/create';
+import { LoginProvider } from '../providers/login/login';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ApiProvider } from '../providers/localapi/localapi';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     DataProvider,
-    ApiProvider
+    CreateProvider,
+    LoginProvider
   ]
 })
 export class AppModule {}

@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import { LoginProvider } from '../../providers/login/login';
+
 import 'rxjs/add/operator/map';
 
 export class User {
@@ -17,8 +19,15 @@ export class User {
 @Injectable()
 export class AuthProvider {
   currentUser: User;
-  
+
+  constructor(private loginProvider: LoginProvider) {
+
+  }
+  // WAŻE http://localhost:8080/api/user/get/test?pass=test
+
   public login(credentials) {
+    this.loginProvider.test('test', 'tescik');
+    this.loginProvider.showUrl();
     if(credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {

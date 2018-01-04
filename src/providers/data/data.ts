@@ -13,6 +13,14 @@ export class DataProvider {
 
     constructor(private url: string, private http: Http) { }
 
+  changeUrl(url) {
+    this.url = url;
+  }
+
+  showUrl() {
+    console.log(this.url);
+  }
+
   getAll() {
     return this.http.get(this.url)
         .map(response => response.json())

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
-import { ApiProvider } from '../../providers/localapi/localapi';
+import { CreateProvider } from '../../providers/create/create';
 @IonicPage()
 @Component({
   selector: 'page-register',
@@ -11,11 +11,11 @@ export class RegisterPage {
   createSuccess = false;
   registerCredentials = { name: '', password: '' };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private alertCtrl: AlertController, private provider: ApiProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private alertCtrl: AlertController, private createProvider: CreateProvider) {
   }
 
   public register() {
-    this.provider.create(this.registerCredentials) 
+    this.createProvider.create(this.registerCredentials) 
     .subscribe(() => {
         this.auth.register(this.registerCredentials).subscribe(success => {
           if(success) {
