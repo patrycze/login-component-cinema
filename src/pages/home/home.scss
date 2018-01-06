@@ -1,5 +1,26 @@
 page-home {
-  .home {
-    background: #56CA96;
+  #nav {
+    background: #FF8C8C;
   }
+  .home {
+    background: #FF8C8C;
+    clear: both;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  img {
+     
+      // width: 100px;
+      // height: 100px;
+      // max-width: 100px;
+      // max-height: 100px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      border: 5px solid rgba(255, 255, 255, 0.5);
+  }
+
+
 }

@@ -30,4 +30,10 @@ export class HomePage implements OnInit {
       this.navCtrl.setRoot('LoginPage')
     });
   }
+  
+    logInConsole() {
+      console.log(this.data);
+      console.log(this.loginStatus);
+    }
+
 }

@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar color="dark">
+  <ion-navbar id="nav" color=#FF8C8C>
     <ion-title>
-      Member Area
+      {{ data.user.displayName }}
     </ion-title>
     <ion-buttons end>
       <button ion-button (click)="logout()">
@@ -12,6 +12,18 @@
 </ion-header>
  
 <ion-content class="home" padding>
-  <h3>Welcome inside, {{name}}!</h3>
-  Your Email is: {{password}}
+    <!-- <div class="col-lg-6 col-sm-6"> -->
+        <div class="card hovercard">
+            <div class="useravatar">
+                <img alt="" src="{{data.user.photoURL}}">
+            </div>
+            <div class="card-info"> <span class="card-title">{{logInConsole()}}</span>
+    
+            </div>
+       </div>
+    <!-- </div> -->
+  <h3>{{ logInConsole() }}</h3>
+     {{ data.user.displayName }}
+  
 </ion-content>
+

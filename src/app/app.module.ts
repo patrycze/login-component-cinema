@@ -15,8 +15,8 @@ import { AuthRegisterProvider } from '../providers/auth/auth';
 import { DataProvider } from '../providers/data/data';
 import { CreateProvider } from '../providers/create/create';
 import { LoginProvider } from '../providers/login/login';
-import { FacebookProvider } from '../providers/facebook/facebook';
 import { FacebookComponent } from '../components/facebook/facebook';
+import { ImdbProvider } from '../providers/imdb/imdb';
 
 const fire = {
   apiKey: "AIzaSyDXZyIlRxdvROsWDYzgCPC4Xtv0SsH89yo",
@@ -53,7 +53,8 @@ const fire = {
     LoginProvider,
     AuthRegisterProvider,
     AngularFireAuth,
-    FacebookComponent
+    FacebookComponent,
+    ImdbProvider
   ]
 })
 export class AppModule {}

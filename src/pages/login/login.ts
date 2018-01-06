@@ -2,21 +2,31 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { AuthLoginProvider } from '../../providers/auth/auth';
 import { LoginProvider } from '../../providers/login/login';
+import { ImdbProvider } from '../../providers/imdb/imdb';
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
+
+
+
 export class LoginPage {
   loading: Loading;
   registerCredentials = { email: '', password: ''};
-
+  film = { title: '', poster: ''};
   constructor(public navCtrl: NavController, public navParams: NavParams, private authLogin: AuthLoginProvider, 
-    private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+    private alertCtrl: AlertController, private loadingCtrl: LoadingController, private imdbProvider: ImdbProvider) {
   
   }
-
+  public getInfoAboutFilm() {
+    this.imdbProvider.getAll().toPromise().then(response => {
+      this.film.title = response.Title;
+      this.film.poster = response.Poster;
+      console.log(response);
+    })
+  }
   public createAccount() {
     this.navCtrl.push('RegisterPage');
   }
@@ -55,7 +65,18 @@ export class LoginPage {
     });
   }
   ionViewDidLoad() {
+    this.getInfoAboutFilm();
     console.log('ionViewDidLoad LoginPage');
   }
 
+}
+
+export class Film {
+  title: string;
+  poster: string;
+
+  constructor(title: string, poster: string) {
+    this.title = title;
+    this.poster = poster;
+  }
 }
