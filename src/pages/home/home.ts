@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, IonicPage, NavParams } from 'ionic-angular';
 import { AuthLoginProvider } from '../../providers/auth/auth';
 
 @IonicPage()
@@ -7,15 +7,22 @@ import { AuthLoginProvider } from '../../providers/auth/auth';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
   password = '';
   name = '';
+  private data;
+  private loginStatus;
 
-  constructor(public navCtrl: NavController, private auth: AuthLoginProvider) {
-    let info = this.auth.getUserInfo();
-    this.password = info.password;
-    this.name = info.name;
-    console.log(this.password, this.name);
+  constructor(public navCtrl: NavController, private auth: AuthLoginProvider, public navParams: NavParams) {
+    // let info = this.auth.getUserInfo();
+    // this.password = info.password;
+    // this.name = info.name;
+    // console.log(this.password, this.name);
+  }
+
+  ngOnInit() {
+    this.data = this.navParams.get('result');
+    this.loginStatus = this.navParams.get('loginStatus');
   }
 
   public logout() {
