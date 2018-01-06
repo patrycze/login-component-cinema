@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
-import { AuthProvider } from '../../providers/auth/auth';
+import { AuthLoginProvider } from '../../providers/auth/auth';
 import { LoginProvider } from '../../providers/login/login';
 
 @IonicPage()
@@ -12,7 +12,7 @@ export class LoginPage {
   loading: Loading;
   registerCredentials = { email: '', password: ''};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, 
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authLogin: AuthLoginProvider, 
     private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
   
   }
@@ -21,21 +21,21 @@ export class LoginPage {
     this.navCtrl.push('RegisterPage');
   }
 
-  public login() {
-    this.showLoading();
-    this.auth.login(this.registerCredentials).subscribe(allowed => {
-      if(allowed) {
-        console.log(allowed);
-        this.navCtrl.setRoot('HomePage');
-      } else {
-        this.showError("Acces Denied");
-      }
-    }, 
-      error => {
-        this.showError(error);
-      });
-  }
-
+   public login() { 
+      this.showLoading();
+      this.authLogin.login(this.registerCredentials).then(response => {
+        if((response as Array<{}>).length != 0) {
+          this.navCtrl.setRoot('HomePage');
+        } else {
+          this.showError("Acces Denied");
+        }
+      }, 
+        error => {
+          this.showError(error);
+        });
+    }
+       
+  
   showLoading() {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...',
@@ -45,6 +45,7 @@ export class LoginPage {
   }
 
   showError(text) {
+  
     this.loading.dismiss();
     
     let alert = this.alertCtrl.create({
@@ -52,7 +53,6 @@ export class LoginPage {
       subTitle: text,
       buttons: ['OK']
     });
-    //alert.present(prompt);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');

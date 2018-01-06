@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
-import { AuthProvider } from '../../providers/auth/auth';
+import { AuthLoginProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -8,13 +8,14 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  username = '';
-  email = '';
+  password = '';
+  name = '';
 
-  constructor(public navCtrl: NavController, private auth: AuthProvider) {
+  constructor(public navCtrl: NavController, private auth: AuthLoginProvider) {
     let info = this.auth.getUserInfo();
-    this.username = info['name'];
-    this.email = info['email'];
+    this.password = info.password;
+    this.name = info.name;
+    console.log(this.password, this.name);
   }
 
   public logout() {

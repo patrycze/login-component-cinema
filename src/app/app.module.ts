@@ -7,7 +7,8 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 // import { HomePage } from '../pages/home/home';
-import { AuthProvider } from '../providers/auth/auth';
+import { AuthLoginProvider } from '../providers/auth/auth';
+import { AuthRegisterProvider } from '../providers/auth/auth';
 import { DataProvider } from '../providers/data/data';
 import { CreateProvider } from '../providers/create/create';
 import { LoginProvider } from '../providers/login/login';
@@ -31,10 +32,11 @@ import { LoginProvider } from '../providers/login/login';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider,
+    AuthLoginProvider,
     DataProvider,
     CreateProvider,
-    LoginProvider
+    LoginProvider,
+    AuthRegisterProvider
   ]
 })
 export class AppModule {}

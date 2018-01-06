@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { AuthProvider } from '../../providers/auth/auth';
+import { AuthRegisterProvider } from '../../providers/auth/auth';
 import { CreateProvider } from '../../providers/create/create';
+
 @IonicPage()
 @Component({
   selector: 'page-register',
@@ -11,17 +12,18 @@ export class RegisterPage {
   createSuccess = false;
   registerCredentials = { name: '', password: '' };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private alertCtrl: AlertController, private createProvider: CreateProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    private authRegister: AuthRegisterProvider, private alertCtrl: AlertController, private createProvider: CreateProvider) {
   }
 
   public register() {
     this.createProvider.create(this.registerCredentials) 
     .subscribe(() => {
-        this.auth.register(this.registerCredentials).subscribe(success => {
+        this.authRegister.register(this.registerCredentials).subscribe(success => {
           if(success) {
             this.createSuccess = true;
             this.showPopup("Success", "Account created");
-            this.navCtrl.setRoot('LoginPage');
+            this.navCtrl.setRoot('LoginPage'); 
           } else {
             this.showPopup("Error", "Problem with creating account")
           }
@@ -39,7 +41,7 @@ export class RegisterPage {
         text: 'OK',
         handler: data => {
           if(this.createSuccess) {
-            this.navCtrl.popToRoot();
+            //this.navCtrl.popToRoot();
           }
         }
       }]

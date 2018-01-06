@@ -2,22 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { LoginProvider } from '../../providers/login/login';
-
-import 'rxjs/add/operator/map';
-
 export class User {
   name: string;
-  email: string;
+  password: string;
 
-  constructor(name: string, email: string) {
+  constructor(name: string, password: string) {
     this.name = name;
-    this.name = email;
+    this.password = password;
   }
 }
 
 
 @Injectable()
-export class AuthProvider {
+export class AuthLoginProvider {
+  access: any;
   currentUser: User;
 
   constructor(private loginProvider: LoginProvider) {
@@ -25,21 +23,37 @@ export class AuthProvider {
   }
   // WAŻE http://localhost:8080/api/user/get/test?pass=test
 
-  public login(credentials) {
-    this.loginProvider.test('test', 'tescik');
-    this.loginProvider.showUrl();
-    if(credentials.email === null || credentials.password === null) {
-      return Observable.throw("Please insert credentials");
-    } else {
-      return Observable.create(observer => {
-        // At this point make a request to backend to make a real check
-         let access = (credentials.password === "pass" && credentials.email === "email")
-         this.currentUser = new User('Patryk', 'patryk@gmail.com');
-         observer.next(access);
-         observer.complete();
-      });
-    }
+   public login(credentials) { 
+    this.currentUser = new User(credentials.email, credentials.password);
+    console.log(credentials);
+    return new Promise((resolve, reject) => {
+      let access;
+      // change url for auth login
+      this.loginProvider.change(credentials.email, credentials.password);
+  
+      resolve(this.loginProvider.getAll().toPromise().then())
+    })
   }
+
+  public getUserInfo() : User {
+    return this.currentUser;
+  }
+
+  public logout() {
+    return Observable.create(observer => {
+      this.currentUser = null;
+      observer.next(true);
+      observer.complete();
+    });
+  }
+}
+
+
+
+ export class AuthRegisterProvider {
+  currentUser: User;
+
+  
   public register(credentials) {
     if(credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
