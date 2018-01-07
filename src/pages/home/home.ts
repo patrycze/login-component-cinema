@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, IonicPage, NavParams } from 'ionic-angular';
 import { AuthLoginProvider } from '../../providers/auth/auth';
+// import { CinemasPage } from '../cinemas/cinemas';
+// import { RecomendedPage } from '../recomended/recomended';
 
 @IonicPage()
 @Component({
@@ -31,9 +33,19 @@ export class HomePage implements OnInit {
     });
   }
   
+  goToRecomendedPage() {
+    this.navCtrl.push('RecomendedPage');
+  }
+
     logInConsole() {
       console.log(this.data);
       console.log(this.loginStatus);
     }
-
+    // goToCinemasPage() {
+    //   this.navCtrl.push('RecomendedPage')
+    // }
+    
+    //  tab1root = HomePage;
+    //  tab2root = CinemasPage;
+    //  tab3root = RecomendedPage;
 }

@@ -27,6 +27,10 @@ export class LoginPage {
       console.log(response);
     })
   }
+
+  public goToProfile() {
+    this.navCtrl.push('HomePage');
+  }
   public createAccount() {
     this.navCtrl.push('RegisterPage');
   }

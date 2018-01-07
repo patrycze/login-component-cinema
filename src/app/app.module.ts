@@ -9,7 +9,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from  'angularfire2/auth';
 
 import { MyApp } from './app.component';
-// import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
 import { AuthLoginProvider } from '../providers/auth/auth';
 import { AuthRegisterProvider } from '../providers/auth/auth';
 import { DataProvider } from '../providers/data/data';
@@ -17,6 +17,8 @@ import { CreateProvider } from '../providers/create/create';
 import { LoginProvider } from '../providers/login/login';
 import { FacebookComponent } from '../components/facebook/facebook';
 import { ImdbProvider } from '../providers/imdb/imdb';
+// import { CinemasPage } from '../pages/cinemas/cinemas';
+// import { RecomendedPage } from '../pages/recomended/recomended';
 
 const fire = {
   apiKey: "AIzaSyDXZyIlRxdvROsWDYzgCPC4Xtv0SsH89yo",
@@ -29,8 +31,10 @@ const fire = {
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
     // HomePage
+    // RecomendedPage,
+    // CinemasPage
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,8 @@ const fire = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    // RecomendedPage,
+    // CinemasPage,
     MyApp
     // HomePage
   ],
