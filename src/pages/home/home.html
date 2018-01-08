@@ -15,7 +15,7 @@
     <!-- <div class="col-lg-6 col-sm-6"> -->
         <div class="card hovercard">
             <div class="useravatar">
-                <img alt="" src="{{data.user.photoURL}}">
+                <img alt="" src="{{ avatar }}">
             </div>
             <div class="card-info"> <span class="card-title"></span>
     
@@ -31,16 +31,16 @@
        </div>
     <!-- </div> -->
   <h3></h3>
-     {{ data.user.displayName }}
+     {{ name }}
   
 
 
 <ion-card>
     <ion-item>
       <ion-avatar item-start>
-        <img src="{{data.user.photoURL}}">
+        <img src="{{ avatar }}">
       </ion-avatar>
-      <h2>{{ data.user.displayName }}</h2>
+      <h2>{{ name }}</h2>
       <p>November 5, 1955</p>
     </ion-item>
   
@@ -71,6 +71,8 @@
     </ion-row>
   
   </ion-card>
+
+  <button (click)="test()">VIEW ALL</button>
   <!-- <ion-tabs>
     <ion-tab [root]="tab1root" tabTitle="Cinemas" tabIcon="home"></ion-tab>
     <ion-tab [root]="tab2root" tabTitle="Map" tabIcon="home"></ion-tab> 

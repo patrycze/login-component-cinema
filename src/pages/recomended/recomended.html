@@ -5,9 +5,9 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
+  
   <ion-navbar>
-    <ion-title>recomended</ion-title>
+    <ion-title>Recomended</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,17 +15,17 @@
 
 <ion-content class="home" padding>
 
-
-  <ion-card>
+<div *ngIf="show">
+  <ion-card class="card" *ngFor="let post of posts.Search">
     <ion-item>
       <ion-avatar item-start>
         <!-- <img src="{{data.user.photoURL}}"> -->
       </ion-avatar>
       <!-- <h2>{{ data.user.displayName }}</h2> -->
-      <p>November 5, 1955</p>
+      {{post.Title}}, {{post.Year}}
     </ion-item>
   
-    <img src="">
+    <img id="poster" src="{{post.Poster}}">
   
     <ion-card-content>
       <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
@@ -33,9 +33,9 @@
   
     <ion-row>
       <ion-col>
-        <button ion-button icon-left clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>12 Likes</div>
+        <button ion-button icon-left clear small (click)="updateLikes(post)">
+          <ion-icon name="heart"></ion-icon>
+          <div id="{{post.imdbID}}">12 Likes</div>
         </button>
       </ion-col>
       <ion-col>
@@ -49,8 +49,7 @@
           11h ago
         </ion-note>
       </ion-col>
-    </ion-row>
-  
+    </ion-row> 
   </ion-card>
-  
+</div>
 </ion-content>

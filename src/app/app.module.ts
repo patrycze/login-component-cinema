@@ -19,6 +19,8 @@ import { FacebookComponent } from '../components/facebook/facebook';
 import { ImdbProvider } from '../providers/imdb/imdb';
 // import { CinemasPage } from '../pages/cinemas/cinemas';
 // import { RecomendedPage } from '../pages/recomended/recomended';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 const fire = {
   apiKey: "AIzaSyDXZyIlRxdvROsWDYzgCPC4Xtv0SsH89yo",
@@ -40,7 +42,8 @@ const fire = {
     BrowserModule,
     AngularFireModule.initializeApp(fire),
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +63,9 @@ const fire = {
     AuthRegisterProvider,
     AngularFireAuth,
     FacebookComponent,
-    ImdbProvider
+    ImdbProvider,
+    HttpClient
+    
   ]
 })
 export class AppModule {}
