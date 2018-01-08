@@ -15,7 +15,7 @@
     <!-- <div class="col-lg-6 col-sm-6"> -->
         <div class="card hovercard">
             <div class="useravatar">
-                <img alt="" src="{{ avatar }}">
+                <img alt="" id="avatar" src="{{ avatar }}">
             </div>
             <div class="card-info"> <span class="card-title"></span>
     
@@ -23,7 +23,7 @@
             <button ion-button icon-left clear small (click)="goToRecomendedPage()">
               <ion-icon name="ios-film-outline" id="filmIcon"></ion-icon>
             </button>
-            <button ion-button icon-left clear small>
+            <button ion-button icon-left clear small (click)="goToAddPlace()">
               <ion-icon name="ios-navigate-outline" id="mapIcon"></ion-icon> 
             </button>
            
@@ -34,7 +34,7 @@
      {{ name }}
   
 
-
+<!-- 
 <ion-card>
     <ion-item>
       <ion-avatar item-start>
@@ -68,11 +68,50 @@
           11h ago
         </ion-note>
       </ion-col>
-    </ion-row>
-  
-  </ion-card>
+    </ion-row> 
+  </ion-card> -->
+<button (click)="getAllPosts()">VIEW ALL {{ isReady }}</button>
 
-  <button (click)="test()">VIEW ALL</button>
+<div>
+  <ion-card *ngFor="let post of userPosts">
+    <ion-item>
+      <ion-avatar item-start>
+        <img  src="{{ avatar }}">
+      </ion-avatar>
+      <h2>{{ name }}</h2>
+      <p>November 5, 1955</p>
+    </ion-item>
+  
+    <img id="poster" src="{{post.poster}}">
+  
+    <ion-card-content>
+      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    </ion-card-content>
+  
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="heart"></ion-icon>
+          <div>12 Likes</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          11h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</div>
+
+
+ 
   <!-- <ion-tabs>
     <ion-tab [root]="tab1root" tabTitle="Cinemas" tabIcon="home"></ion-tab>
     <ion-tab [root]="tab2root" tabTitle="Map" tabIcon="home"></ion-tab> 

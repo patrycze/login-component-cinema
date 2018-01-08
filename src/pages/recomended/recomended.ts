@@ -36,18 +36,6 @@ export class RecomendedPage  {
         console.log(this.user);
         this.show = true;
       })
-
-    // let characterHomeworld = this.http.get('http://www.omdbapi.com/?apikey=e699f616&t=Hydrozagadka');
-
-    // forkJoin([character, characterHomeworld]).subscribe(results => {
-    //   // results[0] is our character
-    //   // results[1] is our character homeworld
-    //   (results[0] as any).homeworld = results[1];
-    //   this.posts = results[0];
-    //   console.log(this.posts.Search);
-    //}
-    
-  //);
   }
 
   updateLikes(post) {

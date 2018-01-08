@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, IonicPage } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from  'angularfire2/auth';
+import { SetLocationPage } from '../pages/set-location/set-location';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -17,10 +18,11 @@ import { CreateProvider } from '../providers/create/create';
 import { LoginProvider } from '../providers/login/login';
 import { FacebookComponent } from '../components/facebook/facebook';
 import { ImdbProvider } from '../providers/imdb/imdb';
-// import { CinemasPage } from '../pages/cinemas/cinemas';
-// import { RecomendedPage } from '../pages/recomended/recomended';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 const fire = {
   apiKey: "AIzaSyDXZyIlRxdvROsWDYzgCPC4Xtv0SsH89yo",
@@ -34,24 +36,26 @@ const fire = {
 @NgModule({
   declarations: [
     MyApp,
-    // HomePage
     // RecomendedPage,
-    // CinemasPage
+    // CinemasPage,
+    // SetLocationPage
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(fire),
     IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDxTO3Ou0s-LTGWqQXDdpxbQPfuTp86pew'
+    }),
     HttpModule,
     HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    // RecomendedPage,
-    // CinemasPage,
-    MyApp
-    // HomePage
+    MyApp,
+    // SetLocationPage
   ],
+  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -64,6 +68,7 @@ const fire = {
     AngularFireAuth,
     FacebookComponent,
     ImdbProvider,
+    Geolocation,
     HttpClient
     
   ]

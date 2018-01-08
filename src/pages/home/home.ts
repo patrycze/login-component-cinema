@@ -16,7 +16,8 @@ export class HomePage implements OnInit {
   avatar = '';
   private data;
   private loginStatus;
-  userPosts: any;
+  userPosts = new Array();
+  isReady = false;
   constructor(public navCtrl: NavController, private auth: AuthLoginProvider, public navParams: NavParams,  private http: HttpClient) {
 
     //console.log(this.password, this.name);
@@ -35,63 +36,46 @@ export class HomePage implements OnInit {
       this.name = info.name;
     }
   }
-test() {
-  this.getAllPosts().subscribe(response => {
-    console.log(response);
-  })
-}
   getAllPosts() {
 
-  
-
-    // this.http.post('http://localhost:8080/api/userfilm/get/', {
-    //   name: this.name
-    // }).mergeMap((interests) => {
-    //   return this.http.post('http://localhost:8080/api/post/get/', {
-    //     filmid: interests
-    //   }).map((res: Response) => {res.json()});
-    // })
-      return this.http.post('http://localhost:8080/api/userfilm/get/', {
-      name: this.name
+  this.http.post('http://localhost:8080/api/userfilm/get/', {
+    name: this.name })
+  .map(res => res)
+  .mergeMap((films: any[]) => {
+    if (films.length > 0) {
+      return Observable.forkJoin(
+        films.map((film: any) => {
+          return this.http.post('http://localhost:8080/api/post/get/', {
+            filmid: film.filmid })
+            .map((res: any) => {
+              return res;
+            });
+        })
+      );
+    } else {
+      return Observable.of([]);
+    }
+  }).subscribe(res => {
+    res.forEach(e => {
+      this.userPosts.push(e[0]);
+      //console.log(e[0]);
     })
-     .map((res: any) => {
-       res = res.filmid;
-      })
-    .flatMap((film: any) => {
-      console.log(film);      
-      return this.http.post('http://localhost:8080/api/post/get/', {
-        filmid: film.filmid
-      })
-       .map((res: any) => {
-        //  res.json()
-         });
-    })
+    this.isReady = true;
+    console.log(this.isReady);
+    console.log(this.userPosts);
+    this.refreshPage();
+    
+  });
+}  
 
-  //   this.http.post('http://localhost:8080/api/userfilm/get/',{
-  //     name: this.name
-  //   }).subscribe(res => {
-  //     console.log(res);
-  //   })
+goToAddPlace() {
+  console.log("Add")
+  this.navCtrl.push('AddPlacePage');
+}
 
-  //   this.http.post('http://localhost:8080/api/userfilm/get/',{
-  //     name: this.name
-  //   }).map((res: Response) => {
-  //     this.customer = res;
-  //     return this.customer;
-  //  })
-  //   .mergeMap((film:any) => this.http.post('http://localhost:8080/api/post/get/', {
-  //     filmid : "tt0071853"
-  //   }))
-  //   .subscribe(res => console.log(res));
-
-//   return this.http.post('http://localhost:8080/api/userfilm/get/',{
-//         name: this.name
-//       }).flatMap((film: any) => this.http.post('http://localhost:8080/api/post/get/', {
-//         filmid: film.filmid
-//       }))
- }  
-
-
+ refreshPage() {
+  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+}
 
   public logout() {
     this.auth.logout().subscribe(success => {
@@ -113,5 +97,6 @@ test() {
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad HomePage');
+      this.getAllPosts() 
     }
 }
