@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ModalController } from 'ionic-angular';
 import { Location } from '../../models/location';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import { Seat } from '../../models/seat';
 
 @IonicPage()
 @Component({
@@ -17,7 +17,9 @@ export class AddPlacePage {
     lng: 40.76
   }
   locationIsSet = false;
-
+  seatIsSet = false;
+  seat: Seat;
+  dimensions;
   constructor(private geolocation: Geolocation, private modalController: ModalController, 
     private loadingController: LoadingController, private toastController: ToastController,private n: NavController) {
   }
@@ -33,7 +35,21 @@ export class AddPlacePage {
       data => {
         if(data) {
           this.location = data.location;
-          this.locationIsSet = true;  
+          this.locationIsSet = true;
+        }
+      }
+    )
+  }
+
+  selectSeat() {
+    const modal = this.modalController.create('SeatPage', { row: this.seat, isSet: this.seatIsSet});
+    modal.present();
+    modal.onDidDismiss(
+      data => {
+        if(data) {
+          this.seat = data.isSelectedArray;
+          this.seatIsSet = true; 
+          this.dimensions = data.dimensions; 
         }
       }
     )
@@ -57,6 +73,17 @@ export class AddPlacePage {
       });
       toast.present();
      });
+  }
+
+  checkAllConditions() {
+    if(this.seatIsSet && this.locationIsSet)
+      return true;
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad HomePage');
+    
+     
   }
 
 }

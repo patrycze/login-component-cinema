@@ -1,0 +1,47 @@
+page-seat {
+
+body{
+    background-color: #EEEBEB;
+    }
+.btn-default {
+    padding: 5px 5px;
+    outline: none;
+    background-color: transparent;
+    color: #56DA56;
+    border-color: #56DA56;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.btn-default:focus {
+    padding: 5px 5px;
+    outline: none;
+    color: #56DA56;
+    background-color: transparent;
+    border-color: #56DA56;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.btn-default.selected {
+    background : #56DA56;
+    color: #fff;
+  }
+  
+.sits {
+    
+    text-align: center;
+}
+
+.hall {
+    background-color: #EEEBEB;
+}
+
+.ui-controller {
+    background-color: #EEEBEB;
+    margin-left: 30px;
+    margin-top: 50px;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif; 
+}
+}
