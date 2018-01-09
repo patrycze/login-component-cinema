@@ -42,6 +42,7 @@ export class AddPlacePage {
   }
 
   selectSeat() {
+    console.log(this.seat);
     const modal = this.modalController.create('SeatPage', { row: this.seat, isSet: this.seatIsSet});
     modal.present();
     modal.onDidDismiss(
