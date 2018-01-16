@@ -13,10 +13,17 @@
        <ion-col>
           <agm-map [latitude]="location.lat" [longitude]="location.lng" (mapClick)="onSetMarker($event)">
             <agm-marker [latitude]="marker.lat" [longitude]="marker.lng" *ngIf="marker"></agm-marker>
+            <div *ngIf="cinemas">
+             <agm-marker (markerClick)="updateDiv(cinema)" [latitude]="cinema.lat" [longitude]="cinema.lng"  *ngFor="let cinema of cinemas">
+        
+             </agm-marker>
+            </div>
           </agm-map>
        </ion-col>
      </ion-row>
+   
      <ion-row>
+      
        <ion-col>
          <button ion-button block color="secondary" (click)="onConfirm()" [disabled]="!marker" type="submit">Confirm</button>
        </ion-col>
@@ -24,6 +31,32 @@
          <button ion-button block color="secondary" (click)="onAbort()" type="submit">Abort</button>
        </ion-col>
      </ion-row>
+     <ion-row>
+     </ion-row>
+     <ion-row>
+    </ion-row>
+    <table class="table table-hover">
+    <thead>
+        <tr>
+            <th width="230px">Title</th>
+      
+            <th  width="50px">Year</th>
+          
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let movie of movies; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+            <td width="240px">{{movie.title}}</td>
+            
+            <td  width="50px">{{movie.year}}</td>
+  
+            
+            <td>{{movie.genre}}</td>
+        </tr>
+    </tbody>
+</table>
+
    </ion-grid>
   </ion-content>
   

@@ -18,8 +18,10 @@ export class AddPlacePage {
   }
   locationIsSet = false;
   seatIsSet = false;
-  seat: Seat;
+  seat: any;
   dimensions;
+  selectedMovie: any;
+
   constructor(private geolocation: Geolocation, private modalController: ModalController, 
     private loadingController: LoadingController, private toastController: ToastController,private n: NavController) {
   }
@@ -36,6 +38,8 @@ export class AddPlacePage {
         if(data) {
           this.location = data.location;
           this.locationIsSet = true;
+          this.selectedMovie = data.movie;
+          console.log(  this.selectedMovie);
         }
       }
     )
@@ -48,14 +52,31 @@ export class AddPlacePage {
     modal.onDidDismiss(
       data => {
         if(data) {
-          this.seat = data.isSelectedArray;
-          this.seatIsSet = true; 
           this.dimensions = data.dimensions; 
+          this.seat = data.isSelectedArray;
+          console.log(this.seat);
+          this.seatIsSet = true; 
+          
+          this.markSits();
         }
       }
     )
   }
 
+  markSits() {
+    console.log('jeee');
+    if(typeof(this.seat) !== 'undefined') {
+      this.seat.forEach(element => {
+        let sit = document.getElementById(`sit-${element.column}-${element.row}`)
+        console.log(`sit-${element.column}-${element.row}`);
+        sit.style.background = "black";
+        // setTimeout(function(){
+        //  
+        //   console.log(sit.style.background)
+        // },100)
+      });
+    }
+  }
   onLocate() {
     const loader = this.loadingController.create({
       content: 'Getting your location..'
@@ -83,7 +104,7 @@ export class AddPlacePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-    
+  
      
   }
 

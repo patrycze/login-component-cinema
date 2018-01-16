@@ -42,6 +42,9 @@
           </ion-col>
         </ion-row>
         <ion-row>
+            <p *ngIf="selectedMovie">Wybrałeś {{ this.selectedMovie.title }}</p>
+          </ion-row>
+        <ion-row>
           <ion-col text-center>
             <h5></h5>
           </ion-col>
@@ -62,9 +65,7 @@
           <ion-col>
             <div class="sits"  *ngIf="dimensions">
               <div *ngFor="let column of dimensions.col" class="sits-group">
-                  <button ion-button color="secondary" *ngFor="let row of dimensions.row" type="button" class="btn btn-default"
-                  
-                  (click)="onPress(column,row)"> {{ row }} </button>
+                  <button id="sit-{{column}}-{{row}}" ion-button color="secondary" *ngFor="let row of dimensions.row" type="button" class="btn btn-default"> {{ row }} </button>
               </div>
           </div>
           </ion-col>

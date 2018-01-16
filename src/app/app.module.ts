@@ -22,7 +22,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import { CinemaProvider } from '../providers/cinema/cinema';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 const fire = {
   apiKey: "AIzaSyDXZyIlRxdvROsWDYzgCPC4Xtv0SsH89yo",
@@ -47,6 +48,7 @@ const fire = {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDxTO3Ou0s-LTGWqQXDdpxbQPfuTp86pew'
     }),
+    AgmSnazzyInfoWindowModule,
     HttpModule,
     HttpClientModule
   ],
@@ -69,7 +71,8 @@ const fire = {
     FacebookComponent,
     ImdbProvider,
     Geolocation,
-    HttpClient
+    HttpClient,
+    CinemaProvider
     
   ]
 })

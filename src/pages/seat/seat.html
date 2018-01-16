@@ -23,7 +23,7 @@
           <ion-col>
             <div class="sits">
               <div *ngFor="let column of columns" class="sits-group">
-                  <button ion-button color="secondary" *ngFor="let row of rows" type="button" class="btn btn-default"
+                  <button id="sit-{{column}}-{{row}}" ion-button color="secondary" *ngFor="let row of rows" type="button" class="btn btn-default"
                   [class.selected]="isColorSelected(column, row)"
                   (click)="onPress(column,row)"> {{ row }} </button>
               </div>
