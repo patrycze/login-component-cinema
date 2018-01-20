@@ -5,6 +5,7 @@ import { ModalController } from 'ionic-angular';
 import { Location } from '../../models/location';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Seat } from '../../models/seat';
+import { HttpClient } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -19,15 +20,31 @@ export class AddPlacePage {
   locationIsSet = false;
   seatIsSet = false;
   seat: any;
+  price: any;
   dimensions;
   selectedMovie: any;
   isSelectedArray = [];
-  constructor(private geolocation: Geolocation, private modalController: ModalController, 
-    private loadingController: LoadingController, private toastController: ToastController,private n: NavController) {
+  user: any;
+  constructor(private http: HttpClient, private geolocation: Geolocation, private modalController: ModalController, 
+    private loadingController: LoadingController, private toastController: ToastController, public navParams: NavParams) {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value)
+    this.isSelectedArray.forEach(el => {
+      this.http.post('http://localhost:8080/api/ticket/create', {
+        user: this.user,
+        title: this.selectedMovie.title,
+        cinema: this.location,
+        price: this.selectedMovie.price,
+        col:  el.column,
+        row:  el.row
+      }).subscribe(result => {
+        console.log(result);
+      })  
+      console.log(el);
+    })
+    //console.log(this.user, this.selectedMovie.title, this.location, this.selectedMovie.price);
+   
   }
 
   onOpenMap() {
@@ -68,10 +85,7 @@ export class AddPlacePage {
     )
   }
 
-  sendToDb() {
 
-  }
-  
   markSits() {
     if(typeof(this.seat) !== 'undefined') {
       this.seat.forEach(element => {
@@ -109,8 +123,8 @@ export class AddPlacePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-  
-     
+    this.user = this.navParams.get('user'); 
+    console.log(this.user);
   }
 
 }

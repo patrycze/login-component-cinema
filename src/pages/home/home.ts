@@ -70,7 +70,9 @@ export class HomePage implements OnInit {
 
 goToAddPlace() {
   console.log("Add")
-  this.navCtrl.push('AddPlacePage');
+  this.navCtrl.push('AddPlacePage', {
+    user: this.name
+  });
 }
 
  refreshPage() {
@@ -87,6 +89,12 @@ goToAddPlace() {
     this.navCtrl.push('RecomendedPage', {
       name: this.name,
       pass: 'test'
+    });
+  }
+
+  goToTicket() {
+    this.navCtrl.push('TicketPage', {
+      name: this.name
     });
   }
 

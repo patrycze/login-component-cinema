@@ -14,6 +14,7 @@ export class SetLocationPage {
   marker: Location;
   cinemas: any;
   movies: any;
+  cinema: any;
   selectedRow: any;
   constructor(public navCtrl: NavController, private http: HttpClient, public navParams: NavParams, private viewController: ViewController) {
     this.location = this.navParams.get('location');
@@ -28,10 +29,11 @@ export class SetLocationPage {
     console.log(this.movies[this.selectedRow])
   }
 
-  updateDiv(test) {
-    this.http.post('https://pastebin.com/raw/9yXnuQwZ', {}).subscribe(result => {
+  updateDiv(cinema) {
+    this.http.post('http://localhost:8080/api/film/get', { cinema : cinema.name }).subscribe(result => {
       this.movies = result;
-      console.log(this.movies)
+      console.log(cinema)
+      this.cinema = cinema;
     })
   }
   getCinema() {
@@ -47,7 +49,7 @@ export class SetLocationPage {
 
   onConfirm() {
     console.log(this.location)
-    this.viewController.dismiss({location: this.marker, movie: this.movies[this.selectedRow]})
+    this.viewController.dismiss({location: this.cinema.name, movie: this.movies[this.selectedRow]})
   }
 
 
