@@ -12,7 +12,9 @@ body{
     margin-top: 5px;
     margin-left: 5px;
 }
-
+p {
+    font-family: "Courier New", Times, Monospace;
+}
 .btn-default:focus {
     padding: 5px 5px;
     outline: none;

@@ -42,7 +42,10 @@
           </ion-col>
         </ion-row>
         <ion-row>
-            <p *ngIf="selectedMovie">Wybrałeś {{ this.selectedMovie.title }}</p>
+
+        </ion-row>
+        <ion-row>
+            <h1 *ngIf="selectedMovie">Wybrałeś {{ this.selectedMovie.title }}</h1>
           </ion-row>
         <ion-row>
           <ion-col text-center>
@@ -65,14 +68,17 @@
           <ion-col>
             <div class="sits"  *ngIf="dimensions">
               <div *ngFor="let column of dimensions.col" class="sits-group">
-                  <button id="sit-{{column}}-{{row}}" ion-button color="secondary" *ngFor="let row of dimensions.row" type="button" class="btn btn-default"> {{ row }} </button>
+                  <button id="sit-{{column}}-{{row}}" ion-button *ngFor="let row of dimensions.row" 
+                  type="button" class="btn btn-default"
+                  [class.selected]="isColorSelected(column, row)"> {{ row }} </button>
               </div>
           </div>
           </ion-col>
+
         </ion-row>
         <ion-row>
           <ion-col>
-            <button ion-button color="secondary" block type="submit" [disabled]="!(locationIsSet && seatIsSet)">BUY</button>
+            <button ion-button color="secondary" block type="submit" onclick="sendToDb()" [disabled]="!(locationIsSet && seatIsSet)">BUY</button>
           </ion-col>
         </ion-row>
       </ion-grid>

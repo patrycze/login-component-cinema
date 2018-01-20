@@ -34,7 +34,7 @@
         <ion-label>Wybrałeś {{ isSelectedArray.length }} bilety</ion-label>
         <ion-row>
           <ion-col>
-            <button ion-button block color="secondary" (click)="onConfirm()" [disabled]="!isSeat" type="submit">Confirm</button>
+            <button ion-button block color="secondary" (click)="onConfirm()" [disabled]="!isSelectedArray" type="submit">Confirm</button>
           </ion-col>
           <ion-col>
             <button ion-button block color="secondary" (click)="onAbort()" type="submit">Abort</button>

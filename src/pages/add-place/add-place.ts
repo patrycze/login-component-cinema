@@ -21,7 +21,7 @@ export class AddPlacePage {
   seat: any;
   dimensions;
   selectedMovie: any;
-
+  isSelectedArray = [];
   constructor(private geolocation: Geolocation, private modalController: ModalController, 
     private loadingController: LoadingController, private toastController: ToastController,private n: NavController) {
   }
@@ -45,35 +45,40 @@ export class AddPlacePage {
     )
   }
 
+  isColorSelected(column, row) {
+    return this.isSelectedArray.findIndex(x => x.column == column && 
+      x.row == row) != -1;
+  }
+
+
   selectSeat() {
     console.log(this.seat);
-    const modal = this.modalController.create('SeatPage', { row: this.seat, isSet: this.seatIsSet});
+    const modal = this.modalController.create('SeatPage', { row: this.isSelectedArray, isSet: this.seatIsSet});
     modal.present();
     modal.onDidDismiss(
       data => {
         if(data) {
           this.dimensions = data.dimensions; 
-          this.seat = data.isSelectedArray;
-          console.log(this.seat);
+          this.isSelectedArray = data.isSelectedArray;
+          console.log(this.dimensions);
           this.seatIsSet = true; 
-          
           this.markSits();
         }
       }
     )
   }
 
+  sendToDb() {
+
+  }
+  
   markSits() {
-    console.log('jeee');
     if(typeof(this.seat) !== 'undefined') {
       this.seat.forEach(element => {
         let sit = document.getElementById(`sit-${element.column}-${element.row}`)
         console.log(`sit-${element.column}-${element.row}`);
-        sit.style.background = "black";
-        // setTimeout(function(){
-        //  
-        //   console.log(sit.style.background)
-        // },100)
+        console.log(sit);
+        sit.focus();
       });
     }
   }

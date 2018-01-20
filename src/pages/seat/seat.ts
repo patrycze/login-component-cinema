@@ -11,10 +11,14 @@ export class SeatPage {
 
   isSeat = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams,  private viewController: ViewController) {
+    if(this.navParams.get('row')) {
+      this.isSelectedArray = this.navParams.get('row')
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SeatPage');
+    console.log(this.isSelectedArray);    
   }
 
 
@@ -48,7 +52,6 @@ export class SeatPage {
   isColorSelected(column, row) {
     return this.isSelectedArray.findIndex(x => x.column == column && 
       x.row == row) != -1;
-      
   }
 
 

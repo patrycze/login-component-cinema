@@ -11,7 +11,7 @@ page-add-place {
         margin-right: auto;
       }
 
-      .btn-default {
+.btn-default {
     padding: 5px 5px;
     outline: none;
     background-color: white;
@@ -21,11 +21,15 @@ page-add-place {
     margin-left: 5px;
 }
 
+h1 {
+    font-family: "Lucida Console", Times, Monospace;
+}
+
 .btn-default:focus {
     padding: 5px 5px;
     outline: none;
-    color: #56DA56;
-    background-color: white;
+    color: white;
+    background-color: #56DA56;
     border-color: #56DA56;
     margin-top: 5px;
     margin-left: 5px;
