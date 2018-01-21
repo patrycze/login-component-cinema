@@ -70,7 +70,7 @@ export class AddPlacePage {
 
   selectSeat() {
     console.log(this.seat);
-    const modal = this.modalController.create('SeatPage', { row: this.isSelectedArray, isSet: this.seatIsSet});
+    const modal = this.modalController.create('SeatPage', {selected: this.selectedMovie, row: this.isSelectedArray, isSet: this.seatIsSet});
     modal.present();
     modal.onDidDismiss(
       data => {
